@@ -6,15 +6,16 @@
  * Descripition:  prints the alphabet, in lowercase, followed by a new line.
  *
  * Return: Always 0 (success)
+ *
 */
 
-void print_alphabet(void)
+	void print_alphabet(void)
 {
-	char letter = 'a';
+	char i;
 
-	while (letter <= 'z')
+	for (i = 'a'; i <= 'z'; i++)
 	{
-		_putchar(letter);
-		letter++;
+		_putchar(i);
 	}
+	_putchar('\n');
 }
