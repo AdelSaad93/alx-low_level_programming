@@ -6,8 +6,8 @@
  * @n: The character to be checked.
  *
  * Return: returns 1 if n is greater than zero,
- *		returns 0 if n is zero,
- *		returns -1 f n is less than zero .
+ *			returns 0 if n is zero,
+ *			returns -1 f n is less than zero .
  *
 */
 int print_sign(int n)
@@ -16,12 +16,13 @@ int print_sign(int n)
 	{
 		return (1);
 	}
-	if (n == 0)
+	else if (n == 0)
 	{
 		return (0);
 	}
-	if (n < 0)
+	else if (n < 0)
 	{
 		return (-1);
 	}
+
 }
