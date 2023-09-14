@@ -1,5 +1,0 @@
-#!/bin/bash
-echo "filename"
-read filename 
-echo "#!/bin/bash" > ${filename}
-chmod u+x ${filename}
