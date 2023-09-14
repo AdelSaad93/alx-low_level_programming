@@ -1,19 +1,20 @@
 #include "main.h"
+
 /**
- * print_square - prints square stuff
+ * print_square - prints a square of '#' characters
  *
- * @size: integer to set square size
+ * @size: Size of the square
  */
 void print_square(int size)
 {
-	int i;
-	int j;
-
 	if (size <= 0)
 	{
 		_putchar('\n');
-	} else
+	}
+	else
 	{
+		int i, j;
+
 		for (i = 0; i < size; i++)
 		{
 			for (j = 0; j < size; j++)
