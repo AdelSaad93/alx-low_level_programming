@@ -9,15 +9,17 @@
 char *leet(char *str)
 {
 	char leet_letters[] = "aAeEoOtTlL";
-	char leet_codes[] = "443370711";
+	char leet_replacements[] = "4433007711";
 
-	for (int i = 0; str[i]; i++)
+	int i, j;
+
+	for (i = 0; str[i]; i++)
 	{
-		for (int j = 0; leet_letters[j]; j++)
+		for (j = 0; leet_letters[j]; j++)
 		{
 			if (str[i] == leet_letters[j])
 			{
-				str[i] = leet_codes[j];
+				str[i] = leet_replacements[j];
 				break;
 			}
 		}
