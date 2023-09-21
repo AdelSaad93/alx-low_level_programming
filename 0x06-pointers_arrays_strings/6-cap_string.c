@@ -4,7 +4,7 @@
  * is_separator - Checks if a character is a word separator.
  * @c: The character to check.
  *
- * Return: 1 if it's a separator, 0 otherwise.
+ * Return: 1 if the character is a separator, 0 otherwise.
  */
 int is_separator(char c)
 {
@@ -20,8 +20,8 @@ int is_separator(char c)
 }
 
 /**
- * cap_string - Capitalizes the first letter of each word in a string.
- * @str: The string to capitalize.
+ * cap_string - Capitalizes all words in a string.
+ * @str: The string to be capitalized.
  *
  * Return: A pointer to the modified string.
  */
@@ -35,13 +35,15 @@ char *cap_string(char *str)
 		{
 			capitalize_next = 1;
 		}
-		else if (capitalize_next && (str[i] >= 'a' && str[i] <= 'z'))
+		else if (capitalize_next && str[i] >= 'a' && str[i] <= 'z')
 		{
-			str[i] -= ('a' - 'A');
+			str[i] = str[i] - ('a' - 'A');
 			capitalize_next = 0;
+		}
 		else
 		{
 			capitalize_next = 0;
+		}
 	}
 
 	return (str);
