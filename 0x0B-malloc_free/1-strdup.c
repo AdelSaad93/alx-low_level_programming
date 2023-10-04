@@ -9,26 +9,28 @@
 
 char *_strdup(char *str)
 {
+	int length = 0;
+	char *duplicate;
+
 	if (str == NULL)
 		return (NULL);
-
-	int length = 0;
 
 	while (str[length] != '\0')
 	{
 		length++;
 	}
 
-	char *duplicate = malloc((length + 1) * sizeof(char));
+	duplicate = (char *)malloc((length + 1) * sizeof(char));
 
 	if (duplicate == NULL)
 		return (NULL);
 
-	for (int i = 0; i <= length; i++)
+	int i;
+
+	for (i = 0; i <= length; i++)
 	{
 		duplicate[i] = str[i];
 	}
 
 	return (duplicate);
 }
-
