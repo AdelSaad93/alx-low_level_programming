@@ -6,11 +6,11 @@
  * Return: If str is NULL or if memory allocation fails, returns NULL.
  *         Otherwise, returns a pointer to the newly created duplicate string.
  */
-
 char *_strdup(char *str)
 {
 	int length = 0;
 	char *duplicate;
+	int i;
 
 	if (str == NULL)
 		return (NULL);
@@ -25,8 +25,6 @@ char *_strdup(char *str)
 	if (duplicate == NULL)
 		return (NULL);
 
-	int i;
-
 	for (i = 0; i <= length; i++)
 	{
 		duplicate[i] = str[i];
@@ -34,3 +32,4 @@ char *_strdup(char *str)
 
 	return (duplicate);
 }
+
