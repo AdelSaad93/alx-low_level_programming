@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * main function of the program.
+ * main - Entry point of the program
  *
- * It prints a quote by Kevin Mitnick.
+ * Description: It prints a quote by Kevin Mitnick.
  *
- * return 0 on successful execution.
+ * Return: Always 0 (success)
  */
 int main(void)
 {
