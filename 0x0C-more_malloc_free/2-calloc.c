@@ -1,29 +1,29 @@
 #include <stdlib.h>
 
 /**
- * _calloc - Allocates memory for an array and sets the memory to zero
- * @nmemb: The number of elements in the array
- * @size: The size in bytes of each element
+ * _calloc - Allocates memory for an array of nmemb elements of size bytes each
+ * @nmemb: Number of elements in the array
+ * @size: Size in bytes of each element
  *
- * Return: A pointer to the allocated and initialized memory
- *         or NULL if nmemb or size is 0, or if malloc fails
+ * Return: A pointer to the allocated memory, or NULL on failure
  */
 void *_calloc(unsigned int nmemb, unsigned int size)
 {
 	void *ptr;
-	unsigned int total_size;
+	unsigned int i;
+	char *byte_ptr;
 
 	if (nmemb == 0 || size == 0)
 		return (NULL);
 
-	total_size = nmemb * size;
-
-	ptr = malloc(total_size);
+	ptr = malloc(nmemb * size);
 
 	if (ptr == NULL)
 		return (NULL);
 
-	memset(ptr, 0, total_size);
+	byte_ptr = (char *)ptr;
+	for (i = 0; i < (nmemb * size); i++)
+		byte_ptr[i] = 0;
 
 	return (ptr);
 }
