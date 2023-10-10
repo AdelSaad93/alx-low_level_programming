@@ -1,7 +1,6 @@
+#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "main.h"
-
 /**
  * array_range - range of arrays
  * @min: min of arrange
@@ -10,17 +9,26 @@
  */
 int *array_range(int min, int max)
 {
+	int i;
+	int *t;
+	int len;
+
 	if (min > max)
 		return (NULL);
+	len = 0;
+	for (i = min; i <= max; i++)
+		len++;
 
-	int *arr = malloc(sizeof(int) * (max - min + 1));
-
-	if (arr == NULL)
+	t = malloc(sizeof(int) * len);
+	if (t == NULL)
 		return (NULL);
 
-	for (int i = 0; min <= max; i++, min++)
-		arr[i] = min;
-
-	return (arr);
+	i = 0;
+	while (min <= max)
+	{
+		t[i] = min;
+		i++;
+		min++;
+	}
+	return (t);
 }
-
