@@ -2,24 +2,56 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(int argc, char *argv[])
+int (*get_op_func(char *s))(int, int)
 {
-	int num1, num2, result;
-	int (*operation)(int, int);
+	op_t ops[] = {
+		{"+", op_add},
+		{"-", op_sub},
+		{"*", op_mul},
+		{"/", op_div},
+		{"%", op_mod},
+		{NULL, NULL}
+	};
 
-	if (argc != 4)
+	int i = 0;
+
+	while (ops[i].op != NULL)
 	{
-		printf("Error\n");
-		exit(98);
+		if (*s == *(ops[i].op))
+			return (ops[i].f);
+		i++;
 	}
 
-	num1 = atoi(argv[1]);
-	num2 = atoi(argv[3];
-	operation = get_op_func(argv[2]);
+	printf("Error\n");
+	exit(99);
+#include <stdio.h>
+#include <stdlib.h>
+#include "3-calc.h"
+/**
+ * main - main function
+ * @argc: arguments
+ * @argv: array of args
+ * Return: return something
+ */
+int main(int argc, char *argv[])
+{
+	if (argc == 4)
+	{
+		int a;
+		int b;
+		int (*func)(int, int);
 
-	result = operation(num1, num2);
-	printf("%d\n", result);
-
-	return (0);
+		a = atoi(argv[1]);
+		b = atoi(argv[3]);
+		func = get_op_func(argv[2]);
+		if ((*argv[2] == '%' || *argv[2] == '/') && b == 0)
+		{
+			printf("Error\n");
+			exit(100);
+		}
+		printf("%d\n", func(a, b));
+		return (0);
+	}
+	printf("Error\n");
+	exit(98);
 }
-
