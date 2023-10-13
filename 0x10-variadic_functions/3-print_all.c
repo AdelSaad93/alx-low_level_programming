@@ -1,4 +1,6 @@
 #include <stdarg.h>
+#include <stddef.h>
+#include <stdio.h>
 #include "variadic_functions.h"
 
 /**
@@ -53,28 +55,30 @@ void print_all(const char * const format, ...)
 	va_start(args, format);
 
 	int i = 0;
-	int j = 0;
 	char *separator = "";
-	print_func_t print_funcs[] = {
-		{'c', print_c},
-		{'i', print_i},
-		{'f', print_f},
-		{'s', print_s},
-	};
 
 	while (format && format[i])
 	{
-		j = 0;
-		while (j < 4)
+		if ((format[i] == 'c' || format[i] == 'i' ||
+			format[i] == 'f' || format[i] == 's'))
 		{
-			if (format[i] == print_funcs[j].format)
+			printf("%s", separator);
+			switch (format[i])
 			{
-				printf("%s", separator);
-				print_funcs[j].printer(args);
-				separator = ", ";
-				break;
+				case 'c':
+					print_c(args);
+					break;
+				case 'i':
+					print_i(args);
+					break;
+				case 'f':
+					print_f(args);
+					break;
+				case 's':
+					print_s(args);
+					break;
 			}
-			j++;
+			separator = ", ";
 		}
 		i++;
 	}
