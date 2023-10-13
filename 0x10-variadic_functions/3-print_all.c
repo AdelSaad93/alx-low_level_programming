@@ -3,8 +3,8 @@
 #include <stdarg.h>
 
 /**
- * print_char - Print a character.
- * @args: Argument pointer.
+ * print_char - Prints a character.
+ * @args: Argument list.
  */
 void print_char(va_list args)
 {
@@ -12,8 +12,8 @@ void print_char(va_list args)
 }
 
 /**
- * print_integer - Print an integer.
- * @args: Argument pointer.
+ * print_integer - Prints an integer.
+ * @args: Argument list.
  */
 void print_integer(va_list args)
 {
@@ -21,8 +21,8 @@ void print_integer(va_list args)
 }
 
 /**
- * print_float - Print a float.
- * @args: Argument pointer.
+ * print_float - Prints a float.
+ * @args: Argument list.
  */
 void print_float(va_list args)
 {
@@ -30,8 +30,8 @@ void print_float(va_list args)
 }
 
 /**
- * print_string - Print a string or (nil) if the string is NULL.
- * @args: Argument pointer.
+ * print_string - Prints a string.
+ * @args: Argument list.
  */
 void print_string(va_list args)
 {
@@ -44,13 +44,15 @@ void print_string(va_list args)
 }
 
 /**
- * print_all - Print anything based on the format.
- * @format: A format string containing format specifiers.
+ * print_all - Prints anything based on the format.
+ * @format: Format string.
+ * @...: Variable arguments.
  */
 void print_all(const char * const format, ...)
 {
 	char *separator = "";
 	int i = 0;
+
 	va_list args;
 
 	va_start(args, format);
