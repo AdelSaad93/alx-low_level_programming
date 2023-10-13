@@ -1,42 +1,41 @@
-#include <stdarg.h>
-#include <stddef.h>
-#include <stdio.h>
 #include "variadic_functions.h"
+#include <stdio.h>
+#include <stdarg.h>
 
 /**
- * print_c - Print a character.
- * @ap: Argument pointer.
+ * print_char - Print a character.
+ * @args: Argument pointer.
  */
-void print_c(va_list ap)
+void print_char(va_list args)
 {
-	printf("%c", va_arg(ap, int));
+	printf("%c", va_arg(args, int));
 }
 
 /**
- * print_i - Print an integer.
- * @ap: Argument pointer.
+ * print_integer - Print an integer.
+ * @args: Argument pointer.
  */
-void print_i(va_list ap)
+void print_integer(va_list args)
 {
-	printf("%d", va_arg(ap, int));
+	printf("%d", va_arg(args, int));
 }
 
 /**
- * print_f - Print a float.
- * @ap: Argument pointer.
+ * print_float - Print a float.
+ * @args: Argument pointer.
  */
-void print_f(va_list ap)
+void print_float(va_list args)
 {
-	printf("%f", va_arg(ap, double));
+	printf("%f", va_arg(args, double));
 }
 
 /**
- * print_s - Print a string or (nil) if the string is NULL.
- * @ap: Argument pointer.
+ * print_string - Print a string or (nil) if the string is NULL.
+ * @args: Argument pointer.
  */
-void print_s(va_list ap)
+void print_string(va_list args)
 {
-	char *s = va_arg(ap, char *);
+	char *s = va_arg(args, char *);
 
 	if (s == NULL)
 		printf("(nil)");
@@ -50,36 +49,35 @@ void print_s(va_list ap)
  */
 void print_all(const char * const format, ...)
 {
+	char *separator = "";
+	int i = 0;
 	va_list args;
 
 	va_start(args, format);
 
-	int i = 0;
-	char *separator = "";
-
 	while (format && format[i])
 	{
-		if ((format[i] == 'c' || format[i] == 'i' ||
-			format[i] == 'f' || format[i] == 's'))
+		if (format[i] == 'c')
 		{
 			printf("%s", separator);
-			switch (format[i])
-			{
-				case 'c':
-					print_c(args);
-					break;
-				case 'i':
-					print_i(args);
-					break;
-				case 'f':
-					print_f(args);
-					break;
-				case 's':
-					print_s(args);
-					break;
-			}
-			separator = ", ";
+			print_char(args);
 		}
+		else if (format[i] == 'i')
+		{
+			printf("%s", separator);
+			print_integer(args);
+		}
+		else if (format[i] == 'f')
+		{
+			printf("%s", separator);
+			print_float(args);
+		}
+		else if (format[i] == 's')
+		{
+			printf("%s", separator);
+			print_string(args);
+		}
+		separator = ", ";
 		i++;
 	}
 
