@@ -1,10 +1,50 @@
 #include <stdarg.h>
-#include <stdio.h>
+#include "variadic_functions.h"
 
 /**
- * print_all - prints values based on a format string
- * @format: a format string containing format specifiers
- * @...: variable number of arguments corresponding to the format string
+ * print_c - Print a character.
+ * @ap: Argument pointer.
+ */
+void print_c(va_list ap)
+{
+	printf("%c", va_arg(ap, int));
+}
+
+/**
+ * print_i - Print an integer.
+ * @ap: Argument pointer.
+ */
+void print_i(va_list ap)
+{
+	printf("%d", va_arg(ap, int));
+}
+
+/**
+ * print_f - Print a float.
+ * @ap: Argument pointer.
+ */
+void print_f(va_list ap)
+{
+	printf("%f", va_arg(ap, double));
+}
+
+/**
+ * print_s - Print a string or (nil) if the string is NULL.
+ * @ap: Argument pointer.
+ */
+void print_s(va_list ap)
+{
+	char *s = va_arg(ap, char *);
+
+	if (s == NULL)
+		printf("(nil)");
+	else
+		printf("%s", s);
+}
+
+/**
+ * print_all - Print anything based on the format.
+ * @format: A format string containing format specifiers.
  */
 void print_all(const char * const format, ...)
 {
@@ -12,44 +52,35 @@ void print_all(const char * const format, ...)
 
 	va_start(args, format);
 
+	int i = 0;
+	int j = 0;
 	char *separator = "";
-	int print_separator = 0;
+	print_func_t print_funcs[] = {
+		{'c', print_c},
+		{'i', print_i},
+		{'f', print_f},
+		{'s', print_s},
+	};
 
-	while (*format)
+	while (format && format[i])
 	{
-		if (print_separator)
-			printf(", ");
-		print_separator = 1;
-
-		switch (*format)
+		j = 0;
+		while (j < 4)
 		{
-			case 'c':
-				printf("%c", va_arg(args, int));
+			if (format[i] == print_funcs[j].format)
+			{
+				printf("%s", separator);
+				print_funcs[j].printer(args);
+				separator = ", ";
 				break;
-			case 'i':
-				printf("%d", va_arg(args, int));
-				break;
-			case 'f':
-				printf("%f", (float)va_arg(args, double));
-				break;
-			case 's':
-				char *str = va_arg(args, char *);
-
-				if (!str)
-					printf("(nil)");
-				else
-					printf("%s", str);
-				break;
-			default:
-				print_separator = 0;
-				break;
+			}
+			j++;
 		}
-
-		format++;
+		i++;
 	}
 
-	printf("\n");
-
 	va_end(args);
+
+	printf("\n");
 }
 
