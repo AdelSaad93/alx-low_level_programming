@@ -5,41 +5,47 @@
  * print_all - prints values based on a format string
  * @format: a format string containing format specifiers
  * @...: variable number of arguments corresponding to the format string
- *
- * Description: This function prints values based on the format string
- *
  */
 void print_all(const char * const format, ...)
 {
 	va_list args;
 
-	char *separator = "";
-	unsigned int i = 0;
-
 	va_start(args, format);
 
-	while (format && format[i])
+	char *separator = "";
+	int print_separator = 0;
+
+	while (*format)
 	{
-		if (format[i + 1])
-			separator = ", ";
+		if (print_separator)
+			printf(", ");
+		print_separator = 1;
 
-		if (format[i] == 'c')
-			printf("%s%c", separator, va_arg(args, int));
-		else if (format[i] == 'i')
-			printf("%s%d", separator, va_arg(args, int));
-		else if (format[i] == 'f')
-			printf("%s%f", separator, (float)va_arg(args, double));
-		else if (format[i] == 's')
+		switch (*format)
 		{
-			char *str = va_arg(args, char *);
+			case 'c':
+				printf("%c", va_arg(args, int));
+				break;
+			case 'i':
+				printf("%d", va_arg(args, int));
+				break;
+			case 'f':
+				printf("%f", (float)va_arg(args, double));
+				break;
+			case 's':
+				char *str = va_arg(args, char *);
 
-			if (str == NULL)
-				printf("%s(nil)", separator);
-			else
-				printf("%s%s", separator, str);
+				if (!str)
+					printf("(nil)");
+				else
+					printf("%s", str);
+				break;
+			default:
+				print_separator = 0;
+				break;
 		}
 
-		i++;
+		format++;
 	}
 
 	printf("\n");
