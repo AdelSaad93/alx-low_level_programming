@@ -1,7 +1,7 @@
-i#include <stdio.h>
-#include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include "main.h"
 
 /**
@@ -9,8 +9,7 @@ i#include <stdio.h>
  * @filename: The name of the file to read.
  * @letters: The number of letters to read and print.
  *
- * Return: The actual number of letters it could read and print. If an error
- * occurs, or if the file cannot be opened or read, return 0.
+ * Return: The actual number of letters read and printed. Returns 0 on failure.
  */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
@@ -40,7 +39,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	}
 
 	write_count = write(STDOUT_FILENO, buffer, read_count);
-	if (write_count == -1 || write_count != read_count)
+	if (write_count == -1 || (size_t)write_count != (size_t)read_count)
 	{
 		free(buffer);
 		close(fd);
@@ -52,3 +51,4 @@ ssize_t read_textfile(const char *filename, size_t letters)
 
 	return (read_count);
 }
+
