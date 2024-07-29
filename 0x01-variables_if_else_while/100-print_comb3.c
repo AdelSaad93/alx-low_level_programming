@@ -1,7 +1,3 @@
-/*
- * File: 100-print_comb3.c
- */
-
 #include <stdio.h>
 
 /**

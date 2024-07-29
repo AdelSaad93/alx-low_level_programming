@@ -1,7 +1,3 @@
-/*
- * File: 101-print_comb4.c
- */
-
 #include <stdio.h>
 
 /**
